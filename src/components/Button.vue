@@ -22,8 +22,8 @@ defineProps<{
     font-weight: 500;
     background: $primary;
     color: $white;
-    border-radius: rem(48px);
-    padding: rem(16px) rem(32px);
+    border-radius: remTo(48px);
+    padding: remTo(16px) remTo(32px);
     cursor: pointer;
     border: 1px solid $primary;
     text-decoration: none;
