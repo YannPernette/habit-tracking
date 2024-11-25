@@ -1,0 +1,23 @@
+// Colors
+$dark: #5538EE;
+$primary: #6B4EFF;
+$light: #9990FF;
+$lighter: #C6C4FF;
+$lightest: #E7E7FF;
+$white: #FFFFFF;
+$blackdarkest: #090A0A;
+$gray100: #E3E5E5;
+$gray400: #CDCFD0;
+$gray800: #979C9E;
+
+// Font-sizes
+$title1: rem(48px); 
+$title2: rem(32px);
+$title3: rem(24px);
+$large: rem(18px);
+$regular: rem(16px);
+$small: rem(14px);
+$tiny: rem(12px);
+
+// Font family (Inter)
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
