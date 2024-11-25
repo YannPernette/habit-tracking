@@ -6,7 +6,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'outline'],
+      options: ['primary', 'outline', 'nobg'],
     },
     disabled: {
       control: { type: 'boolean' },
@@ -61,6 +61,23 @@ export const OutlineDisabled: Story = {
   args: {
     default: 'Button',
     variant: 'outline',
+    disabled: true,
+  },
+}
+
+export const Nobg: Story = {
+  ...storyOptions,
+  args: {
+    default: 'Button',
+    variant: 'nobg',
+  },
+}
+
+export const NobgDisabled: Story = {
+  ...storyOptions,
+  args: {
+    default: 'Button',
+    variant: 'nobg',
     disabled: true,
   },
 }
