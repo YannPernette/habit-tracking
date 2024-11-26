@@ -5,3 +5,11 @@
 @use "foundations/functions";
 @use "foundations/variables";
 @use "foundations/mixins";
+
+
+// Main styles
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: $regular;
+}
