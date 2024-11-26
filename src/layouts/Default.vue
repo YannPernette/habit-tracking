@@ -10,7 +10,7 @@
         <slot></slot>
     </main>
 
-    <footer class="footer">
+    <footer>
         <slot name="footer"></slot>
     </footer>
 </template>

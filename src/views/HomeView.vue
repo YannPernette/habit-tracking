@@ -2,8 +2,8 @@
 import Button from '@/components/Button.vue';
 import Input from '@/components/Input.vue';
 import Header from '@/components/Header.vue';
+import Footer from '@/components/Footer.vue';
 import DefaultLayout from '@/layouts/Default.vue';
-
 </script>
 
 <template>
@@ -18,7 +18,7 @@ import DefaultLayout from '@/layouts/Default.vue';
     </template>
 
     <template #footer>
-      <h1>Home</h1>
+      <Footer />
     </template>
 
   </DefaultLayout>
