@@ -1,11 +1,12 @@
+@use "functions" as *;
+
 // Colors
-$dark: #5538EE;
 $primary: #6B4EFF;
-$light: #9990FF;
-$lighter: #C6C4FF;
-$lightest: #E7E7FF;
-$white: #FFFFFF;
-$blackdarkest: #090A0A;
+$lightAccent: #9990FF;
+$darkAccent: #948BC7;
+$dark: #3250A0;
+$light: #F8FAFA;
+$black: #090A0A;
 $gray100: #E3E5E5;
 $gray400: #CDCFD0;
 $gray800: #979C9E;
@@ -14,7 +15,7 @@ $gray800: #979C9E;
 $title1: remTo(48px);
 $title2: remTo(32px);
 $title3: remTo(24px);
-$large: remTo(18px);
+$largetxt: remTo(18px);
 $regular: remTo(16px);
 $small: remTo(14px);
 $tiny: remTo(12px);

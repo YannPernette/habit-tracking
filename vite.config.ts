@@ -15,10 +15,10 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        api: 'modern-compiler',
+        api: 'modern',
         additionalData: `
-          @use "@/assets/scss/foundations/variables" as *;
           @use "@/assets/scss/foundations/functions" as *;
+          @use "@/assets/scss/foundations/variables" as *;
           @use "@/assets/scss/foundations/mixins" as *;
         `,
       },
