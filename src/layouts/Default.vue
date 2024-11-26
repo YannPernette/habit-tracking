@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <header class="header">
+    <header>
         <slot name="header"></slot>
     </header>
 

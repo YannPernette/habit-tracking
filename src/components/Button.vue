@@ -22,7 +22,7 @@ defineProps<{
     display: block;
     font-weight: 500;
     background: $primary;
-    color: $white;
+    color: $light;
     border-radius: remTo(48px);
     padding: remTo(16px) remTo(32px);
     cursor: pointer;
@@ -50,8 +50,8 @@ defineProps<{
         border: transparent;
 
         &:hover {
-            background: $lightest;
-            border: $lightest;
+            background: $lightAccent;
+            border: $lightAccent;
         }
     }
 
