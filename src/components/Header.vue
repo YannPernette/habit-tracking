@@ -8,12 +8,14 @@ import Button from './Button.vue';
   <header>
     <div class="header">
       <LogoFull class="header__logo" />
-      <ul class="header_navigation">
-        <li><RouterLink to="#">Accueil</RouterLink></li>
-        <li><RouterLink to="#">Mes habitudes</RouterLink></li>
-        <li><RouterLink to="#">Mon résumé mensuel</RouterLink></li>
+      <ul class="header__navigation">
+        <li><RouterLink class="link header__link" to="#">Accueil</RouterLink></li>
+        <li><RouterLink class="link header__link" to="#">Mes habitudes</RouterLink></li>
+        <li><RouterLink class="link header__link" to="#">Mon résumé mensuel</RouterLink></li>
       </ul>
-      <Button>Se connecter</Button>
+      <div>
+        <Button>Se connecter</Button>
+      </div>
     </div>
   </header>
 </template>
@@ -28,12 +30,20 @@ import Button from './Button.vue';
   justify-content: space-between;
 
   &__logo {
-    width: 200px;
+    width: 150px;
     height: auto;
   }
 
   &__navigation {
     display: flex;
+    list-style: none;
+  }
+
+  &__link {
+    font-size: $largetxt;
+    &::after {
+      content: none;
+    }
   }
 }
 </style>
