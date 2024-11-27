@@ -13,6 +13,7 @@ body {
     font-family: 'Inter', sans-serif;
     font-size: $regular;
     // margin-block-start: 100px;
+    overflow-x: hidden;
 }
 
 .link {
@@ -34,4 +35,8 @@ body {
     &:hover::after {
         width: 100%;
     }
+}
+
+h1 {
+    font-size: $title1;
 }
