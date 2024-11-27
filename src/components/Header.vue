@@ -23,7 +23,7 @@ import Button from './Button.vue';
       </ul>
 
       <div class="header__login">
-        <Button class="header__btnlogin">Se connecter</Button>
+        <Button isRouterLink to="/login" class="header__btnlogin">Se connecter</Button>
         <Button class="header__btnregister -outline">S'inscrire</Button>
       </div>
     </div>
