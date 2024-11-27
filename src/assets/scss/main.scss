@@ -37,6 +37,13 @@ body {
     }
 }
 
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
 h1 {
     font-size: $title1;
+    margin: 0;
 }

@@ -2,7 +2,7 @@
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
 import DefaultLayout from '@/layouts/Default.vue';
-import CardHabit from '@/components/CardHabit.vue';
+import ContainerHabits from '@/components/ContainerHabits.vue';
 </script>
 
 <template>
@@ -12,7 +12,7 @@ import CardHabit from '@/components/CardHabit.vue';
       <Header />
     </template>
 
-    <CardHabit />
+    <ContainerHabits />
 
     <template #footer>
       <Footer />
