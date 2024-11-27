@@ -15,7 +15,7 @@ import Button from './Button.vue';
           <RouterLink class="link header__link" to="#">Accueil</RouterLink>
         </li>
         <li class="header__navigationitem">
-          <RouterLink class="link header__link" to="#">Mes habitudes</RouterLink>
+          <RouterLink class="link header__link" to="/habits">Mes habitudes</RouterLink>
         </li>
         <li class="header__navigationitem">
           <RouterLink class="link header__link" to="#">Mon résumé mensuel</RouterLink>
