@@ -17,8 +17,6 @@ import Delete from './icon/Delete.vue';
 
 <style lang="scss">
 .cardHabit {
-  margin-top: 100px;
-  margin-left: 20px;
   padding: remTo(5px) remTo(16px);
   border-radius: remTo(8px);
   border: 1px solid $black;
