@@ -44,12 +44,19 @@ import Logo from './icon/Logo.vue';
   &__navigation {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     list-style: none;
-    gap: remTo(50px);
+    gap: remTo(30px);
     padding-block-end: remTo(40px);
     margin-block: remTo(20px);
     position: relative;
+    text-align: center;
+
+    @include medium-up {
+      flex-direction: row;
+      gap: remTo(50px);
+    }
 
     &::after {
       content: "";
