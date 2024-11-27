@@ -38,5 +38,15 @@ defineProps<{
     outline: none;
     cursor: not-allowed;
   }
+
+  &.-transparent {
+    background-color: transparent;
+    border: 1px solid $gray;
+    font-weight: 500;
+
+    &::placeholder {
+    color: $gray;
+  }
+  }
 }
 </style>

@@ -1,32 +1,37 @@
 <script setup lang="ts">
+import { useTemplateRef } from 'vue';
+
+const childRef = useTemplateRef('childRef');
+defineExpose({ childRef, open: () => { alert('ok') } });
+
 import LogoFull from './icon/LogoFull.vue';
 import Button from './Button.vue';
 </script>
 
 
 <template>
-    <div class="header">
-      <RouterLink to="/" class="header__homelink">
-        <LogoFull class="header__logo" />
-      </RouterLink>
+  <div ref="childRef" class="header">
+    <RouterLink to="/" class="header__homelink">
+      <LogoFull class="header__logo" />
+    </RouterLink>
 
-      <ul class="header__navigation">
-        <li class="header__navigationitem">
-          <RouterLink class="link header__link" to="#">Accueil</RouterLink>
-        </li>
-        <li class="header__navigationitem">
-          <RouterLink class="link header__link" to="/habits">Mes habitudes</RouterLink>
-        </li>
-        <li class="header__navigationitem">
-          <RouterLink class="link header__link" to="#">Mon résumé mensuel</RouterLink>
-        </li>
-      </ul>
+    <ul class="header__navigation">
+      <li class="header__navigationitem">
+        <RouterLink class="link header__link" to="#">Accueil</RouterLink>
+      </li>
+      <li class="header__navigationitem">
+        <RouterLink class="link header__link" to="/habits">Mes habitudes</RouterLink>
+      </li>
+      <li class="header__navigationitem">
+        <RouterLink class="link header__link" to="#">Mon résumé mensuel</RouterLink>
+      </li>
+    </ul>
 
-      <div class="header__login">
-        <Button isRouterLink to="/login" class="header__btnlogin">Se connecter</Button>
-        <Button class="header__btnregister -outline">S'inscrire</Button>
-      </div>
+    <div class="header__login">
+      <Button isRouterLink to="/login" class="header__btnlogin">Se connecter</Button>
+      <Button class="header__btnregister -outline">S'inscrire</Button>
     </div>
+  </div>
 </template>
 
 <style lang="scss">
@@ -101,7 +106,7 @@ import Button from './Button.vue';
   &__login {
     padding-inline: remTo(70px);
     padding-block: remTo(15px);
-    background: linear-gradient(90deg, rgba(153,144,255,1) 0%, rgba(107,78,255,1) 74%);
+    background: linear-gradient(90deg, rgba(153, 144, 255, 1) 0%, rgba(107, 78, 255, 1) 74%);
     display: flex;
     gap: remTo(20px);
     justify-content: flex-end;

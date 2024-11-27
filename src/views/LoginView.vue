@@ -1,8 +1,18 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
 import DefaultLayout from '@/layouts/Default.vue';
 import LoginForm from '@/components/LoginForm.vue';
+
+// Déclare une référence réactive pour le header
+const refHeader = ref();
+
+onMounted(() => {
+  const header = refHeader.value?.childRef;
+  console.log(header?.offsetHeight)
+  document.documentElement.style.setProperty('--header-height', `${header?.offsetHeight}px`);
+});
 </script>
 
 
@@ -10,7 +20,7 @@ import LoginForm from '@/components/LoginForm.vue';
   <DefaultLayout>
 
     <template #header>
-      <Header />
+      <Header ref="refHeader" />
     </template>
 
     <div class="login">
@@ -33,25 +43,22 @@ import LoginForm from '@/components/LoginForm.vue';
 
 <style lang="scss">
 .login {
-  background: rgb(107, 78, 255);
-  background: radial-gradient(circle, rgba(107, 78, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
-  width: 100vw;
-  height: 100vh;
   position: relative;
 }
 
 .login__background {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - var(--header-height));
+  margin-block-start: var(--header-height);
 
   &::after {
     content: "";
     position: absolute;
-    background: linear-gradient(90deg, rgba(153,144,255,1) 0%, rgba(107,78,255,1) 74%);
+    background: linear-gradient(128deg, rgba(153, 144, 255, 1) 20%, rgba(255, 255, 255, 1) 100%);
     opacity: 0.6;
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - var(--header-height));
     top: 0;
     left: 0;
   }
