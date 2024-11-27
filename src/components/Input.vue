@@ -18,7 +18,7 @@ defineProps<{
 <style lang="scss">
 .input {
   width: -webkit-fill-available;
-  color: $blackdarkest;
+  color: $black;
   border: 1px solid $gray100;
   padding: remTo(16px);
   border-radius: remTo(8px);

@@ -23,7 +23,7 @@ import Button from './Button.vue';
       </ul>
 
       <div class="header__login">
-        <Button class="header__btnlogin">Se connecter</Button>
+        <Button isRouterLink to="/login" class="header__btnlogin">Se connecter</Button>
         <Button class="header__btnregister -outline">S'inscrire</Button>
       </div>
     </div>
@@ -41,6 +41,7 @@ import Button from './Button.vue';
   padding-inline: remTo(30px);
   background-color: $light;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  z-index: 100;
 
   &__homelink {
     display: flex;
