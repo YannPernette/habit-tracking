@@ -10,7 +10,7 @@ defineProps<{
 
 <template>
   <component
-:is="isNuxtLink ? 'NuxtLink' : 'button'" v-bind="isNuxtLink ? { to } : { disabled }"
+:is="isNuxtLink ? 'RouterLink' : 'button'" v-bind="isNuxtLink ? { to } : { disabled }"
     :class="{
     button: true,
     '-outline': variant === 'outline',
