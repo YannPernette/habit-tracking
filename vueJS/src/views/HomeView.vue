@@ -2,6 +2,7 @@
 import Header from '@/components/Header.vue';
 import Footer from '@/components/Footer.vue';
 import DefaultLayout from '@/layouts/Default.vue';
+import { onMounted } from 'vue';
 </script>
 
 <template>
@@ -11,7 +12,7 @@ import DefaultLayout from '@/layouts/Default.vue';
       <Header />
     </template>
 
-    
+
 
     <template #footer>
       <Footer />
