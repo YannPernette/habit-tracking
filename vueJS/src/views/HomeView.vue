@@ -11,7 +11,7 @@ import DefaultLayout from '@/layouts/Default.vue';
       <Header />
     </template>
 
-    
+
 
     <template #footer>
       <Footer />

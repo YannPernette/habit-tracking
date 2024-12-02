@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Logo from './icon/Logo.vue';
 </script>
 
 
@@ -9,13 +8,13 @@ import Logo from './icon/Logo.vue';
 
     <ul class="footer__navigation">
       <li>
-        <RouterLink class="link footer__link" to="#">Accueil</RouterLink>
+        <NuxtLink class="link footer__link" to="#">Accueil</NuxtLink>
       </li>
       <li>
-        <RouterLink class="link footer__link" to="#">Mes habitudes</RouterLink>
+        <NuxtLink class="link footer__link" to="#">Mes habitudes</NuxtLink>
       </li>
       <li>
-        <RouterLink class="link footer__link" to="#">Mon résumé mensuel</RouterLink>
+        <NuxtLink class="link footer__link" to="#">Mon résumé mensuel</NuxtLink>
       </li>
     </ul>
 

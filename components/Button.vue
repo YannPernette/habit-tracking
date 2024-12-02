@@ -2,14 +2,15 @@
 defineProps<{
   disabled?: boolean;
   variant?: "primary" | "outline" | "nobg";
-  isRouterLink?: boolean;
+  isNuxtLink?: boolean;
   to?: string;
 }>();
 
 </script>
 
 <template>
-  <component :is="isRouterLink ? 'RouterLink' : 'button'" v-bind="isRouterLink ? { to } : { disabled }"
+  <component
+:is="isNuxtLink ? 'RouterLink' : 'button'" v-bind="isNuxtLink ? { to } : { disabled }"
     :class="{
     button: true,
     '-outline': variant === 'outline',
@@ -17,7 +18,7 @@ defineProps<{
     '-disabled': disabled
     }"
     >
-    <slot></slot>
+    <slot/>
   </component>
 </template>
 

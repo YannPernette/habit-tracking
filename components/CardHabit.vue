@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Edit from './icon/Edit.vue';
-import Delete from './icon/Delete.vue';
 </script>
 
 
