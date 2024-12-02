@@ -8,10 +8,11 @@ defineProps<{
 
 
 <template>
-  <input :class="{
+  <input
+:class="{
     'input': true,
     '-disabled': disabled
-  }" :placeholder="placeholder" :type="type" />
+  }" :placeholder="placeholder" :type="type" >
 </template>
 
 

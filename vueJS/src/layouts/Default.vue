@@ -3,14 +3,14 @@
 
 <template>
     <header>
-        <slot name="header"></slot>
+        <slot name="header"/>
     </header>
 
     <main>
-        <slot></slot>
+        <slot/>
     </main>
 
     <footer>
-        <slot name="footer"></slot>
+        <slot name="footer"/>
     </footer>
 </template>
