@@ -1,24 +1,22 @@
 <script setup lang="ts">
-import LogoFull from './icon/LogoFull.vue';
-import Button from './Button.vue';
 </script>
 
 
 <template>
     <div class="header">
-      <RouterLink to="/" class="header__homelink">
+      <NuxtLink to="/" class="header__homelink">
         <LogoFull class="header__logo" />
-      </RouterLink>
+      </NuxtLink>
 
       <ul class="header__navigation">
         <li class="header__navigationitem">
-          <RouterLink class="link header__link" to="#">Accueil</RouterLink>
+          <NuxtLink class="link header__link" to="#">Accueil</NuxtLink>
         </li>
         <li class="header__navigationitem">
-          <RouterLink class="link header__link" to="/habits">Mes habitudes</RouterLink>
+          <NuxtLink class="link header__link" to="/habits">Mes habitudes</NuxtLink>
         </li>
         <li class="header__navigationitem">
-          <RouterLink class="link header__link" to="#">Mon résumé mensuel</RouterLink>
+          <NuxtLink class="link header__link" to="#">Mon résumé mensuel</NuxtLink>
         </li>
       </ul>
 

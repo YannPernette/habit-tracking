@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import CardHabit from './CardHabit.vue';
 </script>
 
 
