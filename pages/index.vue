@@ -1,11 +1,15 @@
+<script setup lang='ts'>
+
+</script>
+
+
 <template>
-    <div>Page d'accueil
-        <Button>Je suis bouton</Button>
-    </div>
+<div>
+    page accueil
+</div>
 </template>
 
-<style lang="scss">
-body {
-    margin-top: 200px;
-}
+
+<style lang='scss'>
+
 </style>
