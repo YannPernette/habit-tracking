@@ -9,7 +9,8 @@ defineProps<{
 </script>
 
 <template>
-  <component :is="isRouterLink ? 'RouterLink' : 'button'" v-bind="isRouterLink ? { to } : { disabled }"
+  <component
+:is="isRouterLink ? 'RouterLink' : 'button'" v-bind="isRouterLink ? { to } : { disabled }"
     :class="{
     button: true,
     '-outline': variant === 'outline',
@@ -17,7 +18,7 @@ defineProps<{
     '-disabled': disabled
     }"
     >
-    <slot></slot>
+    <slot/>
   </component>
 </template>
 
