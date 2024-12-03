@@ -8,6 +8,10 @@ const route = useRoute()
 
 const { data: post } = await useSanityQuery<SanityDocument>(POST_QUERY, { slug: route.params.slug })
 
+if (!post.value) {
+    throw createError({ statusCode: 404, statusMessage: 'Le post est introuvable'})
+}
+
 const { projectId, dataset } = useSanity().client.config();
 const urlFor = (source: SanityImageSource) =>
     projectId && dataset
