@@ -16,7 +16,6 @@ const paginationEnd = computed(()=> {
   return page.value * perPage
 })
 
-
 const POSTS_QUERY = groq`*[
   _type == "post"
   && defined(slug.current)
@@ -28,11 +27,24 @@ const CATEGORIES_QUERY = groq`*[
   && defined(slug.current)
 ]|order(publishedAt desc){_id, title, slug}`;
 
+const COUNT_TITLES_QUERY = groq`
+  count(*[
+    _type == "post"
+    && ($filterParam == "" || $filterParam in (categories[]->slug.current))
+  ])
+`;
+
 const { data: posts } = await useSanityQuery<SanityDocument>(POSTS_QUERY, { filterParam: filter, start: paginationStart, end: paginationEnd });
 const { data: categories } = await useSanityQuery<SanityDocument>(CATEGORIES_QUERY);
+const { data: postCount } = await useSanityQuery<number>(COUNT_TITLES_QUERY, { filterParam: filter });
 
 function onCategoryClick(category: SanityDocument) {
-  filter.value = category.slug.current
+  if(filter.value == category.slug.current) {
+    filter.value = ''
+  } else {
+    filter.value = category.slug.current
+    page.value = 1
+  }
 }
 
 function onPageClick(index: number) {
@@ -44,6 +56,13 @@ const urlFor = (source: SanityImageSource) =>
   projectId && dataset
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
+
+useSeoMeta({
+  title: 'Blog - Habits.com',
+  ogTitle: 'Blog',
+  description: 'Retrouvez nos dernières informations et notre actualité sur Habits.com !',
+  ogDescription: 'Ce site est un site informatif', 
+})
 </script>
 
 
@@ -60,7 +79,7 @@ const urlFor = (source: SanityImageSource) =>
       </ul>
     </div>
 
-    <ul class="liste">
+    <ul v-if="posts && posts.length" class="liste">
       <li v-for="(post, index) in posts" :key="index" class="">
         <span v-for="(category, index2) in post.categories" :key="index2" class="tag">{{ category.title }}</span>
         <NuxtLink :to="`/blog/${post.slug.current}`">
@@ -70,9 +89,12 @@ const urlFor = (source: SanityImageSource) =>
         </NuxtLink>
       </li>
     </ul>
+    <div v-else>
+      <p>Aucun post ne correspond à cette catégorie</p>
+    </div>
 
     <ul class="pagination">
-      <li v-for="n in 5" :key="n" @click="onPageClick(n)">
+      <li v-for="n in postCount / perPage" :key="n" @click="onPageClick(n)">
         Page {{ n }}
       </li>
     </ul>

@@ -17,6 +17,15 @@ const urlFor = (source: SanityImageSource) =>
     projectId && dataset
         ? imageUrlBuilder({ projectId, dataset }).image(source)
         : null;
+
+useSeoMeta({
+  title: '${post.value.title} | Tracking App',
+  description: 'Retrouvez nos dernières informations et notre actualité sur Habits.com !',
+  ogTitle: post.value.title,
+  ogDescription: 'Ce site est un site informatif', 
+  ogImage: post.value.image && urlFor(post.value.image)?.url() ?
+  urlFor(post.value.image)?.url() : '/meta-default.png',
+})
 </script>
 
 
