@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import type { SanityDocument } from "@sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 const filter = ref('')
 
@@ -51,11 +49,7 @@ function onPageClick(index: number) {
   page.value = index
 }
 
-const { projectId, dataset } = useSanity().client.config();
-const urlFor = (source: SanityImageSource) =>
-  projectId && dataset
-    ? imageUrlBuilder({ projectId, dataset }).image(source)
-    : null;
+const { urlFor } = useSanityImage()
 
 useSeoMeta({
   title: 'Blog - Habits.com',
