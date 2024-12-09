@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import type { SanityDocument } from "@sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]`;
 const route = useRoute()
@@ -12,11 +10,16 @@ if (!post.value) {
     throw createError({ statusCode: 404, statusMessage: 'Le post est introuvable'})
 }
 
-const { projectId, dataset } = useSanity().client.config();
-const urlFor = (source: SanityImageSource) =>
-    projectId && dataset
-        ? imageUrlBuilder({ projectId, dataset }).image(source)
-        : null;
+const { urlFor } = useSanityImage()
+
+useSeoMeta({
+  title: '${post.value.title} | Tracking App',
+  description: 'Retrouvez nos dernières informations et notre actualité sur Habits.com !',
+  ogTitle: post.value.title,
+  ogDescription: 'Ce site est un site informatif', 
+  ogImage: post.value.image && urlFor(post.value.image)?.url() ?
+  urlFor(post.value.image)?.url() : '/meta-default.png',
+})
 </script>
 
 
