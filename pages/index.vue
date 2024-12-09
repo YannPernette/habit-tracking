@@ -1,25 +1,7 @@
 <script setup lang='ts'>
 import type { SanityDocument } from "@sanity/client";
 
-const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0]{
-  _id,
-  hero {
-    title,
-    introduction,
-    button {title, link},
-    image
-  },
-  functionalities {
-    title,
-    text,
-    elements[] {
-      image,
-      title,
-      subtitle,
-      text
-    }
-  }
-}`;
+const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0]`;
 
 const { data: homepage } = await useSanityQuery<SanityDocument>(HOMEPAGE_QUERY);
 
@@ -29,6 +11,8 @@ const { urlFor } = useSanityImage()
 
 <template>
     <div v-if="homepage" class="homepage">
+
+        <!-- {{ homepage }} -->
         
         <Hero />
 
@@ -39,10 +23,7 @@ const { urlFor } = useSanityImage()
             </div>
             <ul v-if="homepage.functionalities.elements" class="">
                 <li v-for="(element, index) in homepage.functionalities.elements" :key="index">
-                    <img v-if="element.image" class="" :src="urlFor(element.image)?.url()" alt="">
-                    <h3 v-if="element.title">{{ element.title }}</h3>
-                    <p v-if="element.subtitle">{{ element.subtitle }}</p>
-                    <p v-if="element.text">{{ element.text }}</p>
+                    <Functionality v-bind="element" />
                 </li>
             </ul>
         </section>
