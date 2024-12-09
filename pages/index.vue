@@ -4,8 +4,6 @@ import type { SanityDocument } from "@sanity/client";
 const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0]`;
 
 const { data: homepage } = await useSanityQuery<SanityDocument>(HOMEPAGE_QUERY);
-
-const { urlFor } = useSanityImage()
 </script>
 
 
