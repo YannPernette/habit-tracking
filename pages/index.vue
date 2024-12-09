@@ -29,19 +29,8 @@ const { urlFor } = useSanityImage()
 
 <template>
     <div v-if="homepage" class="homepage">
-        <section class="homepage__hero">
-            <div class="homepage__FirstPart">
-                <h1 v-if="homepage.hero.title">{{ homepage.hero.title }}</h1>
-                <p v-if="homepage.hero.introduction">{{ homepage.hero.introduction }}</p>
-                <NuxtLink v-if="homepage.hero.button" :to="`/${homepage.hero.button.link}`">{{
-                    homepage.hero.button.title }}</NuxtLink>
-            </div>
-
-            <div class="homepage__SecondPart">
-                <img v-if="homepage.hero.image" class="homepage__mockup" :src="urlFor(homepage.hero.image)?.url()"
-                    alt="">
-            </div>
-        </section>
+        
+        <Hero />
 
         <section class="homepage__functionalities">
             <div class="">
@@ -63,17 +52,6 @@ const { urlFor } = useSanityImage()
 
 <style lang='scss'>
 .homepage {
-    margin-top: 100px;
-
-    &__hero {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    &__firstPart {}
-
-    &__mockup {
-        width: 200px;
-    }
+    margin-top: 150px;
 }
 </style>
