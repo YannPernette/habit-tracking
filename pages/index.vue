@@ -16,7 +16,9 @@ const { urlFor } = useSanityImage()
         
         <Hero />
 
-        <section class="homepage__functionalities">
+        <Functionalities v-bind="homepage.functionalities" />
+
+        <!-- <section class="homepage__functionalities">
             <div class="">
                 <h2 v-if="homepage.functionalities.title">{{ homepage.functionalities.title }}</h2>
                 <p v-if="homepage.functionalities.text">{{ homepage.functionalities.text }}</p>
@@ -26,7 +28,7 @@ const { urlFor } = useSanityImage()
                     <Functionality v-bind="element" />
                 </li>
             </ul>
-        </section>
+        </section> -->
     </div>
 </template>
 
