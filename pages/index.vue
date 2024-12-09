@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import type { SanityDocument } from "@sanity/client";
 
-const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0]`;
+const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0]{...,"testimonies": testimonies[]->{ ... }}`;
 
 const { data: homepage } = await useSanityQuery<SanityDocument>(HOMEPAGE_QUERY);
 </script>
@@ -10,12 +10,13 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(HOMEPAGE_QUERY);
 <template>
     <div v-if="homepage" class="homepage">
 
-        <!-- {{ homepage }} -->
-        
+        <!-- {{ homepage.testimonies }} -->
+
         <Hero />
 
         <Functionalities v-bind="homepage.functionalities" />
 
+<<<<<<< Updated upstream
         <!-- <section class="homepage__functionalities">
             <div class="">
                 <h2 v-if="homepage.functionalities.title">{{ homepage.functionalities.title }}</h2>
@@ -27,6 +28,15 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(HOMEPAGE_QUERY);
                 </li>
             </ul>
         </section> -->
+=======
+        <Quote v-bind="homepage" />
+
+        <ul>
+            <li v-for="(testimony, index) in homepage.testimonies" :key="index">
+                <Testimony v-bind="testimony" />
+            </li>
+        </ul>
+>>>>>>> Stashed changes
     </div>
 </template>
 
