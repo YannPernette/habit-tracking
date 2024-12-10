@@ -22,7 +22,9 @@ async function onSubmit(event: Event) {
     }
 
     const data = await response.json()
-    console.log('Inscription réussie :', data)
+    
+    const cookieJwt = useCookie('api_tracking_jwt')
+    cookieJwt.value = data.token
 }
 </script>
 
