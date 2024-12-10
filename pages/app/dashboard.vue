@@ -1,6 +1,9 @@
 <script setup lang="ts">
+const config = useRuntimeConfig()
+const apiUrl = config.public.apiBaseUrl
+
 const { data, refresh } = await useAsyncData('dashboard', async () => {
-    const response: Response = await fetch('http://localhost:4000/dashboard', {
+    const response: Response = await fetch(`${apiUrl}/dashboard`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${useCookie('api_tracking_jwt').value}` // Envoi du JWT
