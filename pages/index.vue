@@ -16,7 +16,6 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(HOMEPAGE_QUERY);
 
         <Functionalities v-bind="homepage.functionalities" />
 
-<<<<<<< Updated upstream
         <!-- <section class="homepage__functionalities">
             <div class="">
                 <h2 v-if="homepage.functionalities.title">{{ homepage.functionalities.title }}</h2>
@@ -28,7 +27,6 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(HOMEPAGE_QUERY);
                 </li>
             </ul>
         </section> -->
-=======
         <Quote v-bind="homepage" />
 
         <ul>
@@ -36,7 +34,6 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(HOMEPAGE_QUERY);
                 <Testimony v-bind="testimony" />
             </li>
         </ul>
->>>>>>> Stashed changes
     </div>
 </template>
 
