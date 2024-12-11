@@ -1,29 +1,29 @@
 <script setup lang="ts">
-const config = useRuntimeConfig()
-const apiUrl = config.public.apiBaseUrl
-
-const { data, refresh } = await useAsyncData('dashboard', async () => {
-    const response: Response = await fetch(`${apiUrl}/dashboard`, {
-        method: 'GET',
-        headers: {
-            Authorization: `Bearer ${useCookie('api_tracking_jwt').value}` // Envoi du JWT
-        }
+const { data, refresh } = await useAsyncData('dashboard', async () =>
+    await useAPI('/dashboard', {
+        method: 'GET'
     })
-
-    return await response.json()
-})
+)
 
 function onHabitCreated() {
-    console.log('oui')
+    console.log('Habitude créée avec succès')
     refresh()
 }
+
+onMounted(() => {
+    $on('habit:created', onHabitCreated)
+})
+
+onBeforeUnmount(() => {
+    $off('habit:created', onHabitCreated)
+})
 </script>
 
 
 <template>
     <!-- <ContainerHabits /> -->
     <div style="margin-top: 100px;">
-        {{ data }}
+        <!-- {{ data }} -->
         <br><br>
         <ul>
             <li v-for="(habit, index) in data.globalHabits" :key="index">

@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      apiBaseUrl: process.env.API_BASE_URL,
+      apiTrackingBaseUrl: '',
     },
   },
 
@@ -14,6 +14,10 @@ export default defineNuxtConfig({
     { path: "~/components", pathPrefix: false },
     { path: "~/components/icon", pathPrefix: false },
   ],
+
+  imports: {
+    dirs: ['utils/**']
+  },
 
   sanity: {
     projectId: "bl3s2stx",

@@ -7,26 +7,31 @@ const router = useRouter()
 async function onSubmit(event: Event) {
   event.preventDefault()
 
-  const response = await fetch('http://localhost:4000/auth/login', {
-    method: 'POST',
-    headers: {
-      'content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      username: username.value,
-      password: password.value
-    }),
-  })
+  try {
+    const data = await useAPI('/auth/login', {
+      method: 'POST',
+      body: { username: username.value, password: password.value },
+      auth: false
+    })
 
-  // Vérification de la réponse
-  if (!response.ok) {
-    throw new Error(`Erreur : ${response.statusText}`)
+    const cookieJwt = useCookie('api_tracking_jwt')
+    cookieJwt.value = data.token
+
+    await router.push('/app/dashboard')
+
+  } catch (error: unknown) {
+    if (error instanceof Error && 'response' in error) {
+      const apiError = error as { response: { statusText: string } };
+      throw new Error(`Erreur : ${apiError.response.statusText}`);
+    } else {
+      throw new Error('Erreur : Une erreur inattendue est survenue');
+    }
   }
+}
 
-  const data = await response.json()
-
+async function logout() {
   const cookieJwt = useCookie('api_tracking_jwt')
-  cookieJwt.value = data.token
+  cookieJwt.value = ''
 
   await router.push('/app/dashboard')
 }
@@ -49,6 +54,10 @@ async function onSubmit(event: Event) {
           <button type="submit">ENVOYER</button>
         </div>
       </form>
+    </div>
+
+    <div>
+      <button @click="logout">SE DECONNECTER</button>
     </div>
 
     <div class="login__background">

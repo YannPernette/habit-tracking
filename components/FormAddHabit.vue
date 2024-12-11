@@ -2,24 +2,30 @@
 const title = ref('')
 const description = ref('')
 
-const emit = defineEmits(['habit:created'])
+// const emit = defineEmits(['habit:created'])
 
 async function addHabit(event: Event) {
     event.preventDefault()
 
-    await fetch('http://localhost:4000/habits', {
+    // await fetch('http://localhost:4000/habits', {
+    //     method: 'POST',
+    //     headers: {
+    //         Authorization: `Bearer ${useCookie('api_tracking_jwt').value}`,
+    //         'content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //         title: title.value,
+    //         description: description.value
+    //     }),
+    // })
+
+    await useAPI('/habits', {
         method: 'POST',
-        headers: {
-            Authorization: `Bearer ${useCookie('api_tracking_jwt').value}`,
-            'content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            title: title.value,
-            description: description.value
-        }),
+        body: { title: title.value, description: description.value }
     })
 
-    emit('habit:created')
+    // emit('habit:created')
+    $trigger('habit:created')
 }
 </script>
 
