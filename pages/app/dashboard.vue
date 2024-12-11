@@ -27,13 +27,13 @@ onBeforeUnmount(() => {
         <br><br>
         <ul>
             <li v-for="(habit, index) in data.globalHabits" :key="index">
-                {{ habit.title }} : {{ habit.description }}
+                <CardHabit v-bind="habit" />
             </li>
         </ul>
         <br><br>
         <ul>
             <li v-for="(habit, index) in data.personalHabits" :key="index">
-                {{ habit.title }} : {{ habit.description }}
+                <CardHabit v-bind="habit" />
             </li>
         </ul>
         <br><br>

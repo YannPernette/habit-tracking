@@ -3,25 +3,21 @@
 
 
 <template>
-  <div class="containerHabits">
-    <h1>Mes Habitudes</h1>
-    <ul class="containerHabits__habitsList">
-      <li>
-        <CardHabit />
-      </li>
-      <li>
-        <CardHabit />
-      </li>
-      <li>
-        <CardHabit />
-      </li>
-      <li>
-        <CardHabit />
-      </li>
-      <li>
-        <CardHabit />
+  <div style="margin-top: 100px;">
+    <!-- {{ data }} -->
+    <br><br>
+    <ul>
+      <li v-for="(habit, index) in data.globalHabits" :key="index">
+        <CardHabit v-bind="habit" />
       </li>
     </ul>
+    <br><br>
+    <ul>
+      <li v-for="(habit, index) in data.personalHabits" :key="index">
+        <CardHabit v-bind="habit" />
+      </li>
+    </ul>
+    <br><br>
   </div>
 </template>
 

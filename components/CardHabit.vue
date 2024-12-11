@@ -1,10 +1,15 @@
 <script setup lang="ts">
+defineProps<{
+    title: string,
+    description: string,
+}>();
 </script>
 
 
 <template>
   <div class="cardHabit">
-    <p class="cardHabit__title">Faire ses devoirs</p>
+    <p class="cardHabit__title">{{ title }}</p>
+    <p>{{ description }}</p>
     <div class="cardHabit__actions">
       <span class="cardHabit__edit"><Edit class="cardHabit__editIcon" /><p class="cardHabit__editText">Modifier</p></span>
       <span class="cardHabit__delete"><Delete class="cardHabit__deleteIcon" /><p class="cardHabit__deleteText">Supprimer</p></span>
