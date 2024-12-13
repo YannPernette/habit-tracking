@@ -4,6 +4,17 @@ import type { SanityDocument } from "@sanity/client";
 const HOMEPAGE_QUERY = groq`*[_type == "homepage"][0]{...,"testimonies": testimonies[]->{ ... }}`;
 
 const { data: homepage } = await useSanityQuery<SanityDocument>(HOMEPAGE_QUERY);
+
+
+// SWIPER
+const swiperTestimonies = ref(null)
+useSwiper(swiperTestimonies, {
+    loop: true,
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+})
 </script>
 
 
@@ -29,11 +40,21 @@ const { data: homepage } = await useSanityQuery<SanityDocument>(HOMEPAGE_QUERY);
         </section> -->
         <Quote v-bind="homepage" />
 
-        <ul>
-            <li v-for="(testimony, index) in homepage.testimonies" :key="index">
-                <Testimony v-bind="testimony" />
-            </li>
-        </ul>
+        <ClientOnly>
+            <ul>
+                <swiper-container ref="swiperTestimonies" :init="false">
+                    <swiper-slide v-for="(testimony, index) in homepage.testimonies" :key="index">
+                        <li>
+                            <Testimony v-bind="testimony" />
+                        </li>
+                    </swiper-slide>
+                </swiper-container>
+            </ul>
+            <div class="swiper-button-next">oui</div>
+            <div class="swiper-button-prev">non</div>
+        </ClientOnly>
+
+
     </div>
 </template>
 

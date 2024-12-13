@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxtjs/sanity'],
+  modules: ['@nuxt/eslint', '@nuxtjs/sanity', 'nuxt-swiper'],
 
   components: [
     { path: '~/components', pathPrefix: false },
