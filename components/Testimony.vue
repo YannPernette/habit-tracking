@@ -16,9 +16,9 @@ const { urlFor } = useSanityImage()
             <img v-if="profilePicture" class="testimony__image" :src="urlFor(profilePicture)?.url()" alt="">
         </div>
         <div>
-            <p>{{ name }}</p>
-            <p>{{ work }}</p>
-            <p>{{ text }}</p>
+            <p v-if="name">{{ name }}</p>
+            <p v-if="work">{{ work }}</p>
+            <p v-if="text">{{ text }}</p>
         </div>
     </div>
 </template>
@@ -27,4 +27,12 @@ const { urlFor } = useSanityImage()
 <style lang='scss'>
 .testimony {
     display: flex;
-}</style>
+
+    &__image {
+        border-radius: 100000px;
+        width: 10rem;
+        height: 10rem;
+        object-fit: cover;
+    }
+}
+</style>
