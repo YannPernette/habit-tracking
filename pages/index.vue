@@ -14,6 +14,9 @@ useSwiper(swiperTestimonies, {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
     },
+    pagination: {
+        el: ".swiper-pagination",
+    },
 })
 </script>
 
@@ -41,17 +44,20 @@ useSwiper(swiperTestimonies, {
         <Quote v-bind="homepage" />
 
         <ClientOnly>
-            <ul>
-                <swiper-container ref="swiperTestimonies" :init="false">
-                    <swiper-slide v-for="(testimony, index) in homepage.testimonies" :key="index">
-                        <li>
-                            <Testimony v-bind="testimony" />
-                        </li>
-                    </swiper-slide>
-                </swiper-container>
-            </ul>
-            <div class="swiper-button-next">oui</div>
-            <div class="swiper-button-prev">non</div>
+            <div class="testimonies">
+                <ul>
+                    <swiper-container ref="swiperTestimonies" :init="false">
+                        <swiper-slide v-for="(testimony, index) in homepage.testimonies" :key="index">
+                            <li>
+                                <Testimony v-bind="testimony" />
+                            </li>
+                        </swiper-slide>
+                    </swiper-container>
+                </ul>
+                <div class="swiper-button-next"><ArrowRight /></div>
+                <div class="swiper-button-prev"><ArrowLeft /></div>
+                <div class="swiper-pagination" />
+            </div>
         </ClientOnly>
 
 
@@ -62,5 +68,28 @@ useSwiper(swiperTestimonies, {
 <style lang='scss'>
 .homepage {
     margin-top: 150px;
+}
+
+.testimonies {
+    position: relative;
+    margin-inline: 30%;
+
+    .swiper-button-next {
+        position: absolute;
+        top: 0;
+        right: -15%;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    .swiper-button-prev {
+        position: absolute;
+        top: 0;
+        left: -15%;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
 }
 </style>
