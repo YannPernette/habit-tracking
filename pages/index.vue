@@ -59,8 +59,6 @@ useSwiper(swiperTestimonies, {
                 <div class="swiper-pagination" />
             </div>
         </ClientOnly>
-
-
     </div>
 </template>
 
