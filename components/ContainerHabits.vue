@@ -19,11 +19,13 @@ function refreshHabits() {
 onMounted(() => {
   $on('habit:created', refreshHabits)
   $on('habit:deleted', refreshHabits)
+  $on('habit:edited', refreshHabits)
 })
 
 onBeforeUnmount(() => {
   $off('habit:created', refreshHabits)
   $off('habit:deleted', refreshHabits)
+  $off('habit:edited', refreshHabits)
 })
 </script>
 

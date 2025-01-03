@@ -4,7 +4,7 @@
 
 <template>
     <div class="mx-page" style="margin-top: 100px;">
-        <ContainerHabits which-habits="globalHabits" />
+        <ContainerHabits which-habits="globalHabits" style="margin-bottom: 50px;" />
         <ContainerHabits which-habits="personalHabits" />
 
         <FormAddHabit />
