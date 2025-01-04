@@ -12,13 +12,16 @@ $gray100: #E3E5E5;
 $gray400: #CDCFD0;
 $gray800: #979C9E;
 
+// Gradient
+$primaryGradient: linear-gradient(90deg, rgba(153,144,255,1) 0%, rgba(107,78,255,1) 74%);
+
 // Font-sizes
 $title1: remTo(35px);
 $title2: remTo(32px);
 $title3: remTo(24px);
 $largetxt: remTo(18px);
 $regular: remTo(16px);
-$small: remTo(14px);
+$smalltxt: remTo(14px);
 $tiny: remTo(12px);
 
 // Font family (Inter + Merriweather)
