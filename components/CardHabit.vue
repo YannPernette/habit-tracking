@@ -38,6 +38,7 @@ async function editHabit(event: Event, habitId: number) {
 
 <template>
   <div class="cardHabit">
+    <a :href="`/app/habits/${id}`">
     <div class="cardHabit__content">
       <p class="cardHabit__title">{{ title }}</p>
       <p>{{ description }}</p>
@@ -69,6 +70,7 @@ async function editHabit(event: Event, habitId: number) {
             </div>
         </form>
     </div>
+  </a>
   </div>
 </template>
 
