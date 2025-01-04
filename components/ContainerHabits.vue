@@ -1,44 +1,49 @@
 <script setup lang="ts">
+import type { DashboardPayload } from '~/@types/dashboard';
+
+defineProps<{
+  whichHabits: 'globalHabits' | 'personalHabits';
+}>();
+
+const { data, refresh } = await useAsyncData<DashboardPayload>('dashboard', async () =>
+  await useAPI('/dashboard', {
+    method: 'GET'
+  })
+)
+
+function refreshHabits() {
+  // console.log('Habitude créée avec succès')
+  refresh()
+}
+
+onMounted(() => {
+  $on('habit:created', refreshHabits)
+  $on('habit:deleted', refreshHabits)
+  $on('habit:edited', refreshHabits)
+})
+
+onBeforeUnmount(() => {
+  $off('habit:created', refreshHabits)
+  $off('habit:deleted', refreshHabits)
+  $off('habit:edited', refreshHabits)
+})
 </script>
 
 
 <template>
-  <div class="containerHabits">
-    <h1>Mes Habitudes</h1>
-    <ul class="containerHabits__habitsList">
-      <li>
-        <CardHabit />
-      </li>
-      <li>
-        <CardHabit />
-      </li>
-      <li>
-        <CardHabit />
-      </li>
-      <li>
-        <CardHabit />
-      </li>
-      <li>
-        <CardHabit />
-      </li>
-    </ul>
-  </div>
+  <ul v-if="data" class="containerHabits">
+    <li v-for="(habit, index) in data[whichHabits]" :key="index">
+      <CardHabit v-bind="habit" />
+      <!-- <button >SUPPRIMER</button> -->
+    </li>
+  </ul>
 </template>
 
 
 <style lang="scss">
 .containerHabits {
-  margin-top: 100px;
-  margin-left: 20px;
-  padding: remTo(50px);
-  border-radius: remTo(8px);
-  background: linear-gradient(90deg, rgba(153, 144, 255, 1) 0%, rgba(107, 78, 255, 1) 74%);
-  width: fit-content;
-
-  &__habitsList {
-    display: flex;
-    flex-direction: column;
-    gap: remTo(20px);
-  }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: remTo(30px);
 }
 </style>

@@ -7,18 +7,6 @@ const description = ref('')
 async function addHabit(event: Event) {
     event.preventDefault()
 
-    // await fetch('http://localhost:4000/habits', {
-    //     method: 'POST',
-    //     headers: {
-    //         Authorization: `Bearer ${useCookie('api_tracking_jwt').value}`,
-    //         'content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //         title: title.value,
-    //         description: description.value
-    //     }),
-    // })
-
     await useAPI('/habits', {
         method: 'POST',
         body: { title: title.value, description: description.value }
