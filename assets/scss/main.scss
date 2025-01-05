@@ -14,6 +14,10 @@ body {
     font-size: $regular;
     // margin-block-start: 100px;
     overflow-x: hidden;
+
+    @include medium-up {
+        font-size: $largetxt;
+    }
 }
 
 .link {
