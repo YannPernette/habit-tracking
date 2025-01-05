@@ -24,20 +24,35 @@ useSeoMeta({
 
 
 <template>
-    <div class="blog">
-        <a href="/blog" class="link">&larr; Back to posts</a>
-
-        <div v-if="post" >
-            <h1>{{ post.title }}</h1>
+    <div class="singlePost">
+        <div v-if="post">
+            <img class="singlePost__image" :src="urlFor(post.image)?.url()" alt="">
+            <div class="mx-page">
+                <h1 class="singlePost__title">{{ post.title }}</h1>
             <SanityContent :blocks="post.body" />
-            <img :src="urlFor(post.image)?.url()" alt="">
-            <!-- <SanityImage :asset-id="post.image.asset._ref" /> -->
+            <Button is-nuxt-link to="/blog" class="singlePost__link">&larr; Retour aux posts</Button>
+            </div>
         </div>
     </div>
 </template>
 
 <style lang="scss">
-.blog {
-    // margin-top: 100px;
+.singlePost {
+    margin-top: remTo(85px);
+    
+    &__image {
+        width: 100vw;
+        height: 40vh;
+        object-fit: cover;
+    }
+
+    &__title {
+        margin-block: remTo(20px);
+    }
+
+    &__link {
+        width: fit-content;
+        margin-block: remTo(50px);
+    }
 }
 </style>
