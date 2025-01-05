@@ -85,8 +85,10 @@ useSeoMeta({
     </div>
 
     <ul class="blog__pagination">
-      <li v-for="n in postCount / perPage" :key="n" @click="onPageClick(n)">
-        Page {{ n }}
+      <li 
+        v-for="n in postCount / perPage" :key="n"
+        :class="['blog__page', { '-active': page === n }]" @click="onPageClick(n)">
+        <span>Page {{ n }}</span>
       </li>
     </ul>
   </div>
@@ -110,6 +112,11 @@ useSeoMeta({
     padding: remTo(8px) remTo(20px);
     transition: all .3s ease;
     cursor: pointer;
+
+    &:hover {
+      background-color: $primary;
+      color: $light;
+    }
 
     &.-active {
       background-color: $primary;
@@ -138,7 +145,26 @@ useSeoMeta({
   &__pagination {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: remTo(30px);
+  }
+
+  &__page {
+    text-transform: uppercase;
+    font-size: $largetxt;
+    font-weight: 500;
+    transition: all .2s ease;
+
+    &.-active {
+      color: $primary;
+    }
+
+    &:not(.-active) {
+      cursor: pointer;
+
+      &:hover {
+        color: $darkAccent;
+      }
+    }
   }
 }
 </style>
