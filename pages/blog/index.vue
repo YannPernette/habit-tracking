@@ -6,11 +6,11 @@ const filter = ref('')
 const page = ref(1)
 const perPage = 2
 
-const paginationStart = computed(()=> {
+const paginationStart = computed(() => {
   return (page.value - 1) * perPage
 })
 
-const paginationEnd = computed(()=> {
+const paginationEnd = computed(() => {
   return page.value * perPage
 })
 
@@ -37,7 +37,7 @@ const { data: categories } = await useSanityQuery<SanityDocument>(CATEGORIES_QUE
 const { data: postCount } = await useSanityQuery<number>(COUNT_TITLES_QUERY, { filterParam: filter });
 
 function onCategoryClick(category: SanityDocument) {
-  if(filter.value == category.slug.current) {
+  if (filter.value == category.slug.current) {
     filter.value = ''
   } else {
     filter.value = category.slug.current
@@ -52,26 +52,23 @@ function onPageClick(index: number) {
 const { urlFor } = useSanityImage()
 
 useSeoMeta({
-  title: 'Blog - Habits.com',
+  title: 'Blog - Loopy.com',
   ogTitle: 'Blog',
-  description: 'Retrouvez nos dernières informations et notre actualité sur Habits.com !',
-  ogDescription: 'Ce site est un site informatif', 
+  description: 'Retrouvez nos dernières informations et notre actualité sur Loopy.com !',
+  ogDescription: 'Ce site est un site informatif',
 })
 </script>
 
 
 <template>
-  <div class="accueil">
-    <div>
-      <p>Catégories</p>
-      <ul>
-        <li 
+  <div class="blog mx-page">
+    <ul class="blog__categories">
+      <li 
         v-for="(category, index) in categories" :key="index"
-          :class="['cat', { 'active': filter === category.slug.current }]">
-          <span @click="onCategoryClick(category)">{{ category.title }}</span>
-        </li>
-      </ul>
-    </div>
+        :class="['blog__category', { '-active': filter === category.slug.current }]" @click="onCategoryClick(category)">
+        <span>{{ category.title }}</span>
+      </li>
+    </ul>
 
     <ul v-if="posts && posts.length" class="liste">
       <li v-for="(post, index) in posts" :key="index" class="">
@@ -87,7 +84,7 @@ useSeoMeta({
       <p>Aucun post ne correspond à cette catégorie</p>
     </div>
 
-    <ul class="pagination">
+    <ul class="blog__pagination">
       <li v-for="n in postCount / perPage" :key="n" @click="onPageClick(n)">
         Page {{ n }}
       </li>
@@ -97,12 +94,28 @@ useSeoMeta({
 
 
 <style lang='scss'>
-.accueil {
-  margin-top: 100px;
-  margin-inline: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+.blog {
+  margin-block: remTo(140px);
+
+  &__categories {
+    display: flex;
+    justify-content: center;
+    gap: remTo(20px);
+  }
+
+  &__category {
+    border-radius: remTo(20px);
+    border: 2px solid $primary;
+    font-size: $largetxt;
+    padding: remTo(8px) remTo(20px);
+    transition: all .3s ease;
+    cursor: pointer;
+
+    &.-active {
+      background-color: $primary;
+      color: $light;
+    }
+  }
 
   img {
     width: 100px;
@@ -122,17 +135,9 @@ useSeoMeta({
     color: $black;
   }
 
-  .cat {
-    border-radius: 5px;
-    width: fit-content;
-
-    &.active {
-      background-color: red;
-    }
-  }
-
-  .pagination {
+  &__pagination {
     display: flex;
+    justify-content: center;
     gap: 20px;
   }
 }
