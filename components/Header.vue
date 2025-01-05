@@ -10,7 +10,7 @@
 
       <ul class="header__navigation">
         <li class="header__navigationitem">
-          <NuxtLink class="link header__link" to="#">Accueil</NuxtLink>
+          <NuxtLink class="link header__link" to="/blog">Blog</NuxtLink>
         </li>
         <li class="header__navigationitem">
           <NuxtLink class="link header__link" to="/app/dashboard">Mes habitudes</NuxtLink>
