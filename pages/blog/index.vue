@@ -49,8 +49,6 @@ function onPageClick(index: number) {
   page.value = index
 }
 
-const { urlFor } = useSanityImage()
-
 useSeoMeta({
   title: 'Blog - Loopy.com',
   ogTitle: 'Blog',
@@ -62,7 +60,7 @@ useSeoMeta({
 
 <template>
   <div class="blog mx-page">
-    <ul class="blog__categories">
+    <ul v-if="categories" class="blog__categories">
       <li 
         v-for="(category, index) in categories" :key="index"
         :class="['blog__category', { '-active': filter === category.slug.current }]" @click="onCategoryClick(category)">
@@ -70,14 +68,9 @@ useSeoMeta({
       </li>
     </ul>
 
-    <ul v-if="posts && posts.length" class="liste">
-      <li v-for="(post, index) in posts" :key="index" class="">
-        <span v-for="(category, index2) in post.categories" :key="index2" class="tag">{{ category.title }}</span>
-        <NuxtLink :to="`/blog/${post.slug.current}`">
-          <h2 class="">{{ post.title }}</h2>
-          <p>{{ new Date(post.publishedAt).toLocaleDateString() }}</p>
-          <img v-if="post.image" :src="urlFor(post.image)?.url()" alt="">
-        </NuxtLink>
+    <ul v-if="posts && posts.length" class="blog__posts">
+      <li v-for="(post, index) in posts" :key="index">
+        <CardBlog v-bind="post" />
       </li>
     </ul>
     <div v-else>
@@ -124,22 +117,9 @@ useSeoMeta({
     }
   }
 
-  img {
-    width: 100px;
-    height: auto;
-  }
-
-  .liste {
-    display: flex;
-    gap: 100px;
-  }
-
-  .tag {
-    text-decoration: none;
-    background-color: $lightAccent;
-    padding: 10px;
-    border-radius: 5px;
-    color: $black;
+  &__posts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   &__pagination {
