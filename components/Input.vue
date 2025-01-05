@@ -1,18 +1,33 @@
 <script lang="ts" setup>
 defineProps<{
+  id?: string;
   placeholder: string;
   type: string;
   disabled?: boolean;
+  modelValue: string;
 }>();
-</script>
 
+const emit = defineEmits(['update:modelValue']); // Déclare l'événement `update:modelValue`
+
+const handleInput = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  emit('update:modelValue', target.value); // Utilise `emit` pour envoyer l'événement
+};
+</script>
 
 <template>
   <input
-:class="{
-    'input': true,
-    '-disabled': disabled
-  }" :placeholder="placeholder" :type="type" >
+    :id="id"
+    :class="{
+      'input': true,
+      '-disabled': disabled
+    }"
+    :placeholder="placeholder"
+    :type="type"
+    :value="modelValue"
+    :disabled="disabled"
+    @input="handleInput"
+  >
 </template>
 
 

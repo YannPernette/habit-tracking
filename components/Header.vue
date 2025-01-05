@@ -22,7 +22,7 @@
 
       <div class="header__login">
         <Button is-nuxt-link to="/login" class="header__btnlogin">Se connecter</Button>
-        <Button class="header__btnregister -outline">S'inscrire</Button>
+        <Button is-nuxt-link to="/register" class="header__btnregister -outline">S'inscrire</Button>
       </div>
     </div>
 </template>
