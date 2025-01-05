@@ -1,6 +1,7 @@
 <script setup lang='ts'>
 const { id } = useRoute().params;
 const date = ref()
+const completed = ref(false)
 
 const { data, refresh } = await useAsyncData('habit', async () =>
     await useAPI(`/tracking/${id}/history`, {
@@ -13,12 +14,10 @@ async function completeHabit(event: Event) {
 
     await useAPI(`/tracking/${id}`, {
         method: 'POST',
-        body: { completed: '1', date: date.value }
+        body: { completed: completed.value, date: date.value }
     })
 
     refresh()
-    // emit('habit:created')
-    // $trigger('habit:created')
 }
 
 // Fonction de formatage de la date
@@ -43,18 +42,6 @@ const formatDate = (dateString: string | number | Date) => {
                     formatDate(data.habit.created_at) }}</p>
                 <p>{{ data.habit.description }}</p>
             </div>
-
-            <div class="single-habit__actions">
-                <span class="single-habit__edit">
-                    <Edit class="single-habit__editIcon" />
-                    <p class="single-habit__editText">Modifier</p>
-                </span>
-                <!-- <span class="single-habit__delete" @click="deleteHabit(id)"> -->
-                <span class="single-habit__delete">
-                    <Delete class="single-habit__deleteIcon" />
-                    <p class="single-habit__deleteText">Supprimer</p>
-                </span>
-            </div>
         </div>
 
         <div class="single-habit__history px-page">
@@ -62,21 +49,24 @@ const formatDate = (dateString: string | number | Date) => {
             <p>Retrouvez toutes les fois où vous avez complété cette habitude.</p>
             <ul class="single-habit__dates">
                 <li v-for="(tracking, index) in data.trackings" :key="index">
-                    {{ formatDate(tracking.date) }}
+                    <span>{{ formatDate(tracking.date) }} - {{ tracking.completed === 1 ? 'Complétée' : 'Non complétée' }}</span>
                 </li>
             </ul>
         </div>
 
         <div class="single-habit__complete mx-page">
-            <h2>Compléter votre habitude "{{ data.habit.title }}"</h2>
-            <p>L'habitude sera marquée comme complétée pour le jour choisi.</p>
+            <h3>Compléter votre habitude "{{ data.habit.title }}"</h3>
             <form @submit="completeHabit($event)">
-                <div>
-                    <label for="newDescription">Date</label>
-                    <input id="newDescription" v-model="date" type="date" required>
+                <div class="single-habit__completed">
+                    <label for="completed">Habitude complétée ?</label>
+                    <input id="completed" v-model="completed" type="checkbox">
                 </div>
                 <div>
-                    <button type="submit">Compléter</button>
+                    <label for="date">Date</label>
+                    <input id="date" v-model="date" type="date" required>
+                </div>
+                <div>
+                    <Button class="single-habit__btn" type="submit">Compléter</Button>
                 </div>
             </form>
         </div>
@@ -98,35 +88,6 @@ const formatDate = (dateString: string | number | Date) => {
         margin-block-start: remTo(3px);
         font-size: $smalltxt;
         color: $gray800;
-    }
-
-    &__actions {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        height: fit-content;
-        color: $primary;
-    }
-
-    &__edit,
-    &__delete {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        border-radius: remTo(5px);
-        padding-inline: remTo(30px);
-        transition: all .2s ease-in-out;
-
-        &:hover {
-            background-color: $lightestAccent;
-        }
-    }
-
-    &__editIcon,
-    &__deleteIcon {
-        width: 25px;
-        height: 25px;
-        margin-inline-end: remTo(5px);
     }
 
     &__history {
@@ -164,6 +125,16 @@ const formatDate = (dateString: string | number | Date) => {
         max-width: remTo(500px);
         border: 1px solid $primary;
         border-radius: 50px;
+    }
+
+    &__completed {
+        display: flex;
+        gap: remTo(10px);
+        margin-bottom: 1rem;
+    }
+
+    &__btn {
+        margin-top: 2rem;
     }
 }
 </style>
