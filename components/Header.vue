@@ -16,7 +16,7 @@
           <NuxtLink class="link header__link" to="/app/dashboard">Mes habitudes</NuxtLink>
         </li>
         <li class="header__navigationitem">
-          <NuxtLink class="link header__link" to="#">Mon résumé mensuel</NuxtLink>
+          <NuxtLink class="link header__link" to="tracking">Mon tracking mensuel</NuxtLink>
         </li>
       </ul>
 
