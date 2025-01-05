@@ -2,8 +2,6 @@
 const title = ref('')
 const description = ref('')
 
-// const emit = defineEmits(['habit:created'])
-
 async function addHabit(event: Event) {
     event.preventDefault()
 
@@ -12,14 +10,12 @@ async function addHabit(event: Event) {
         body: { title: title.value, description: description.value }
     })
 
-    // emit('habit:created')
     $trigger('habit:created')
 }
 </script>
 
 
 <template>
-    <!-- <ContainerHabits /> -->
     <div>
         <form @submit="addHabit">
             <div>
@@ -31,7 +27,7 @@ async function addHabit(event: Event) {
                 <input id="description" v-model="description" type="description">
             </div>
             <div>
-                <button type="submit">ENVOYER</button>
+                <Button type="submit">Créer l'habitude !</Button>
             </div>
         </form>
     </div>

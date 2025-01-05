@@ -3,24 +3,27 @@
 
 
 <template>
-    <div class="mx-page" style="margin-top: 100px;">
-        <ContainerHabits which-habits="globalHabits" style="margin-bottom: 50px;" />
+    <div class="container-habits mx-page">
+        <h1>Toutes les habitudes</h1>
+
+        <h2>Habitudes de la communauté</h2>
+        <ContainerHabits which-habits="globalHabits" class="container-habits__global" />
+
+        <h2>Vos habitudes</h2>
         <ContainerHabits which-habits="personalHabits" />
 
+        <h2>Ajouter une habitude</h2>
         <FormAddHabit />
     </div>
-
-    <!-- <form @submit="deleteHabit">
-            <div>
-                <label for="title">Titre</label>
-                <input id="title" v-model="title" type="title">
-            </div>
-            <div>
-                <label for="description">Description</label>
-                <input id="description" v-model="description" type="description">
-            </div>
-            <div>
-                <button type="submit">ENVOYER</button>
-            </div>
-        </form> -->
 </template>
+
+
+<style lang="scss">
+.container-habits {
+    margin-top: remTo(140px);
+
+    &__global {
+        margin-bottom: remTo(50px);
+    }
+}
+</style>

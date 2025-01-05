@@ -3,6 +3,8 @@ defineProps<{
   id: number,
   title: string,
   description: string,
+  // eslint-disable-next-line vue/prop-name-casing
+  user_id: number
 }>();
 
 const newTitle = ref('')
@@ -24,21 +26,20 @@ async function deleteHabit(habitId: number) {
 }
 
 async function editHabit(event: Event, habitId: number) {
-    event.preventDefault()
+  event.preventDefault()
 
-    await useAPI(`/habits/${habitId}`, {
-        method: 'PUT',
-        body: { title: newTitle.value, description: newDescription.value }
-    })
+  await useAPI(`/habits/${habitId}`, {
+    method: 'PUT',
+    body: { title: newTitle.value, description: newDescription.value }
+  })
 
-    $trigger('habit:edited')
+  $trigger('habit:edited')
 }
 </script>
 
 
 <template>
   <div class="cardHabit">
-    <a :href="`/app/habits/${id}`">
     <div class="cardHabit__content">
       <p class="cardHabit__title">{{ title }}</p>
       <p>{{ description }}</p>
@@ -56,21 +57,24 @@ async function editHabit(event: Event, habitId: number) {
     </div>
 
     <div>
-        <form @submit="editHabit($event, id)">
-            <div>
-                <label for="newTitle">Nouveau titre</label>
-                <input id="newTitle" v-model="newTitle" type="text" required>
-            </div>
-            <div>
-                <label for="newDescription">Nouvelle description</label>
-                <input id="newDescription" v-model="newDescription" type="text">
-            </div>
-            <div>
-                <button type="submit">ENVOYER</button>
-            </div>
-        </form>
+      <form @submit="editHabit($event, id)">
+        <div>
+          <label for="newTitle">Nouveau titre</label>
+          <input id="newTitle" v-model="newTitle" type="text" required>
+        </div>
+        <div>
+          <label for="newDescription">Nouvelle description</label>
+          <input id="newDescription" v-model="newDescription" type="text">
+        </div>
+        <div>
+          <button type="submit">ENVOYER</button>
+        </div>
+      </form>
     </div>
-  </a>
+
+    <div v-if="user_id">
+      <Button is-nuxt-link :to="`/app/habits/${id}`">Voir l'historique</Button>
+    </div>
   </div>
 </template>
 
@@ -109,7 +113,8 @@ async function editHabit(event: Event, habitId: number) {
     color: $primary;
   }
 
-  &__edit, &__delete {
+  &__edit,
+  &__delete {
     display: flex;
     align-items: center;
     justify-content: center;

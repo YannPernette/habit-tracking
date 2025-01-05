@@ -14,7 +14,7 @@ async function completeHabit(event: Event) {
 
     await useAPI(`/tracking/${id}`, {
         method: 'POST',
-        body: { completed: completed.value, date: date.value }
+        body: { completed: completed.value ? "1" : "0", date: date.value }
     })
 
     refresh()

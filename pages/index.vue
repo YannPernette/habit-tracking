@@ -24,23 +24,10 @@ useSwiper(swiperTestimonies, {
 <template>
     <div v-if="homepage" class="homepage">
 
-        <!-- {{ homepage.testimonies }} -->
-
         <Hero />
 
         <Functionalities v-bind="homepage.functionalities" />
 
-        <!-- <section class="homepage__functionalities">
-            <div class="">
-                <h2 v-if="homepage.functionalities.title">{{ homepage.functionalities.title }}</h2>
-                <p v-if="homepage.functionalities.text">{{ homepage.functionalities.text }}</p>
-            </div>
-            <ul v-if="homepage.functionalities.elements" class="">
-                <li v-for="(element, index) in homepage.functionalities.elements" :key="index">
-                    <Functionality v-bind="element" />
-                </li>
-            </ul>
-        </section> -->
         <Quote v-bind="homepage" />
 
         <ClientOnly>
@@ -65,12 +52,13 @@ useSwiper(swiperTestimonies, {
 
 <style lang='scss'>
 .homepage {
-    margin-top: 150px;
+    margin-top: remTo(140px);
 }
 
 .testimonies {
     position: relative;
     margin-inline: 30%;
+    margin-block: remTo(100px);
 
     .swiper-button-next {
         position: absolute;
