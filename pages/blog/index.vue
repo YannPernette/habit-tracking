@@ -2,7 +2,6 @@
 import type { SanityDocument } from "@sanity/client";
 
 const filter = ref('')
-
 const page = ref(1)
 const perPage = 2
 
@@ -90,7 +89,8 @@ useSeoMeta({
 
 <style lang='scss'>
 .blog {
-  margin-block: remTo(140px);
+  margin-top: remTo(140px);
+  margin-bottom: remTo(80px);
 
   &__categories {
     display: flex;
@@ -118,8 +118,12 @@ useSeoMeta({
   }
 
   &__posts {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    gap: remTo(50px);
+    justify-content: center;
+    align-items: stretch;
+    margin-block: remTo(50px);
   }
 
   &__pagination {

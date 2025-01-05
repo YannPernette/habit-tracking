@@ -38,6 +38,6 @@ useSeoMeta({
 
 <style lang="scss">
 .blog {
-    margin-top: 100px;
+    // margin-top: 100px;
 }
 </style>
