@@ -1,19 +1,53 @@
 <script setup lang="ts">
-import Input from './Input.vue';
-import Google from './icon/Google.vue';
+const username = ref('')
+const password = ref('')
+
+const router = useRouter()
+
+async function onSubmit(event: Event) {
+  event.preventDefault()
+
+  try {
+    const data = await useAPI('/auth/login', {
+      method: 'POST',
+      body: { username: username.value, password: password.value },
+      auth: false
+    })
+
+    const cookieJwt = useCookie('api_tracking_jwt')
+    cookieJwt.value = data.token
+
+    await router.push('/app/dashboard')
+
+  } catch (error: unknown) {
+    if (error instanceof Error && 'response' in error) {
+      const apiError = error as { response: { statusText: string } };
+      throw new Error(`Erreur : ${apiError.response.statusText}`);
+    } else {
+      throw new Error('Erreur : Une erreur inattendue est survenue');
+    }
+  }
+}
+
+async function logout() {
+  const cookieJwt = useCookie('api_tracking_jwt')
+  cookieJwt.value = ''
+
+  await router.push('/login')
+}
 </script>
 
 
 <template>
   <div class="loginForm">
     <h1 class="loginForm__title">Se connecter</h1>
-    <form class="loginForm__form" action="">
-      <Input class="input" placeholder="test@mail.com" type="email" />
-      <Input class="input" placeholder="password123" type="password" />
-      <a class="button" href="/login.html">Se connecter</a>
-      <p>Pas encore de compte ? <a class="link" href="">Inscrivez-vous</a></p>
-      <p>OU</p>
-      <a class="loginForm__btngoogle" href="/login.html"><Google />Se connecter avec Google</a>
+
+    <form class="loginForm__form" @submit="onSubmit">
+      <Input id="username" v-model="username" placeholder="testuser" type="text" />
+      <Input id="password" v-model="password" placeholder="password123" type="password" />
+      <Button type="submit">Se connecter</Button>
+      <p>Pas encore de compte ? <NuxtLink class="link" to="/register">Inscrivez-vous</NuxtLink></p>
+      <Button @click="logout">Se déconnecter</Button>
     </form>
   </div>
 </template>
@@ -33,7 +67,10 @@ import Google from './icon/Google.vue';
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.31);
-  padding: 20px;
+  padding: remTo(20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 
   &__title {
     font-size: $title2;
@@ -43,28 +80,9 @@ import Google from './icon/Google.vue';
   &__form {
     display: flex;
     flex-direction: column;
-    align-items: center;
 
     .bold {
       font-weight: bold;
-    }
-  }
-
-  &__btngoogle {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border: 1px solid $black;
-    background-color: $light;
-    text-decoration: none;
-    color: $black;
-    justify-content: center;
-    padding-block: 7px;
-    border-radius: 100px;
-    transition: all .2s ease-in-out;
-
-    &:hover {
-      background-color: #f3f3f3;
     }
   }
 }
