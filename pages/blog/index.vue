@@ -2,15 +2,14 @@
 import type { SanityDocument } from "@sanity/client";
 
 const filter = ref('')
-
 const page = ref(1)
 const perPage = 2
 
-const paginationStart = computed(()=> {
+const paginationStart = computed(() => {
   return (page.value - 1) * perPage
 })
 
-const paginationEnd = computed(()=> {
+const paginationEnd = computed(() => {
   return page.value * perPage
 })
 
@@ -37,7 +36,7 @@ const { data: categories } = await useSanityQuery<SanityDocument>(CATEGORIES_QUE
 const { data: postCount } = await useSanityQuery<number>(COUNT_TITLES_QUERY, { filterParam: filter });
 
 function onCategoryClick(category: SanityDocument) {
-  if(filter.value == category.slug.current) {
+  if (filter.value == category.slug.current) {
     filter.value = ''
   } else {
     filter.value = category.slug.current
@@ -49,47 +48,39 @@ function onPageClick(index: number) {
   page.value = index
 }
 
-const { urlFor } = useSanityImage()
-
 useSeoMeta({
-  title: 'Blog - Habits.com',
+  title: 'Blog - Loopy.com',
   ogTitle: 'Blog',
-  description: 'Retrouvez nos dernières informations et notre actualité sur Habits.com !',
-  ogDescription: 'Ce site est un site informatif', 
+  description: 'Retrouvez nos dernières informations et notre actualité sur Loopy.com !',
+  ogDescription: 'Ce site est un site informatif',
 })
 </script>
 
 
 <template>
-  <div class="accueil">
-    <div>
-      <p>Catégories</p>
-      <ul>
-        <li 
+  <div class="blog mx-page">
+    <ul v-if="categories" class="blog__categories">
+      <li 
         v-for="(category, index) in categories" :key="index"
-          :class="['cat', { 'active': filter === category.slug.current }]">
-          <span @click="onCategoryClick(category)">{{ category.title }}</span>
-        </li>
-      </ul>
-    </div>
+        :class="['blog__category', { '-active': filter === category.slug.current }]" @click="onCategoryClick(category)">
+        <span>{{ category.title }}</span>
+      </li>
+    </ul>
 
-    <ul v-if="posts && posts.length" class="liste">
-      <li v-for="(post, index) in posts" :key="index" class="">
-        <span v-for="(category, index2) in post.categories" :key="index2" class="tag">{{ category.title }}</span>
-        <NuxtLink :to="`/blog/${post.slug.current}`">
-          <h2 class="">{{ post.title }}</h2>
-          <p>{{ new Date(post.publishedAt).toLocaleDateString() }}</p>
-          <img v-if="post.image" :src="urlFor(post.image)?.url()" alt="">
-        </NuxtLink>
+    <ul v-if="posts && posts.length" class="blog__posts">
+      <li v-for="(post, index) in posts" :key="index">
+        <CardBlog v-bind="post" />
       </li>
     </ul>
     <div v-else>
       <p>Aucun post ne correspond à cette catégorie</p>
     </div>
 
-    <ul class="pagination">
-      <li v-for="n in postCount / perPage" :key="n" @click="onPageClick(n)">
-        Page {{ n }}
+    <ul class="blog__pagination">
+      <li 
+        v-for="n in postCount / perPage" :key="n"
+        :class="['blog__page', { '-active': page === n }]" @click="onPageClick(n)">
+        <span>Page {{ n }}</span>
       </li>
     </ul>
   </div>
@@ -97,43 +88,67 @@ useSeoMeta({
 
 
 <style lang='scss'>
-.accueil {
-  margin-top: 100px;
-  margin-inline: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+.blog {
+  margin-top: remTo(140px);
+  margin-bottom: remTo(80px);
 
-  img {
-    width: 100px;
-    height: auto;
-  }
-
-  .liste {
+  &__categories {
     display: flex;
-    gap: 100px;
+    justify-content: center;
+    gap: remTo(20px);
   }
 
-  .tag {
-    text-decoration: none;
-    background-color: $lightAccent;
-    padding: 10px;
-    border-radius: 5px;
-    color: $black;
-  }
+  &__category {
+    border-radius: remTo(20px);
+    border: 2px solid $primary;
+    font-size: $largetxt;
+    padding: remTo(8px) remTo(20px);
+    transition: all .3s ease;
+    cursor: pointer;
 
-  .cat {
-    border-radius: 5px;
-    width: fit-content;
+    &:hover {
+      background-color: $primary;
+      color: $light;
+    }
 
-    &.active {
-      background-color: red;
+    &.-active {
+      background-color: $primary;
+      color: $light;
     }
   }
 
-  .pagination {
+  &__posts {
     display: flex;
-    gap: 20px;
+    flex-wrap: wrap;
+    gap: remTo(50px);
+    justify-content: center;
+    align-items: stretch;
+    margin-block: remTo(50px);
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    gap: remTo(30px);
+  }
+
+  &__page {
+    text-transform: uppercase;
+    font-size: $largetxt;
+    font-weight: 500;
+    transition: all .2s ease;
+
+    &.-active {
+      color: $primary;
+    }
+
+    &:not(.-active) {
+      cursor: pointer;
+
+      &:hover {
+        color: $darkAccent;
+      }
+    }
   }
 }
 </style>
