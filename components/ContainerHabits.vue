@@ -12,7 +12,6 @@ const { data, refresh } = await useAsyncData<DashboardPayload>('dashboard', asyn
 )
 
 function refreshHabits() {
-  // console.log('Habitude créée avec succès')
   refresh()
 }
 
@@ -34,7 +33,6 @@ onBeforeUnmount(() => {
   <ul v-if="data" class="containerHabits">
     <li v-for="(habit, index) in data[whichHabits]" :key="index">
       <CardHabit v-bind="habit" />
-      <!-- <button >SUPPRIMER</button> -->
     </li>
   </ul>
 </template>

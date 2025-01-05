@@ -32,7 +32,7 @@ const { urlFor } = useSanityImage()
 
     &__image {
         border-radius: 100000px;
-        width: 10rem;
+        width: 40rem;
         height: 10rem;
         object-fit: cover;
     }
