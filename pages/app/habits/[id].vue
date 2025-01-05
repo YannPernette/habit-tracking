@@ -49,7 +49,8 @@ const formatDate = (dateString: string | number | Date) => {
                     <Edit class="single-habit__editIcon" />
                     <p class="single-habit__editText">Modifier</p>
                 </span>
-                <span class="single-habit__delete" @click="deleteHabit(id)">
+                <!-- <span class="single-habit__delete" @click="deleteHabit(id)"> -->
+                <span class="single-habit__delete">
                     <Delete class="single-habit__deleteIcon" />
                     <p class="single-habit__deleteText">Supprimer</p>
                 </span>
@@ -133,7 +134,7 @@ const formatDate = (dateString: string | number | Date) => {
         border-radius: remTo(100px) remTo(100px) 0 0;
         padding-block-start: remTo(20px);
         padding-block-end: remTo(70px);
-        margin-block-start: remTo(50px);
+        margin-block-start: remTo(40px);
     }
 
     &__dates {
